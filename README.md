@@ -24,3 +24,9 @@ It's important that you don't use the arduino-CAN library available in the
 Arduino IDE built-in library manager, as it has multiple bugs, and many
 operations are implemented in an ineffective way. My pull requests to address
 those have not been reviewed at the time of writing.
+
+## Testing
+
+You don't need to always be in the car to test changes to this library. Instead,
+you can use the FakeSubaruBRZ example from my fork of the `arduino-CAN` library
+on a second Arduino board, and connect the two boards into a small CAN network.
