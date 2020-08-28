@@ -81,6 +81,19 @@ INT | Currently unused, may use 9 in the future
 
 Optionally, put everything into a nice enclosure.
 
+## Tweaking to work with your car
+
+This particular example is optimized to work with FT86 cars (Subaru BRZ,
+Toyota 86, Scion FR-S). You can search for "BRZ" in the source code to see where
+the customizations were made, and tweak to work better with your car.
+
+If you do have an FT86 car, you might want to read [the info](can_db/ft86.md) on
+messages that these cars are known to send over their CAN network.
+
+It might be nice to make these customizations programmable via a mobile app and
+store the preferences in the flash storage of the nRF52840, but currently this
+has not been implemented to keep the code minimalistic and easier to read.
+
 ## Testing
 
 You don't need to always be in the car to test changes.
@@ -88,4 +101,5 @@ Instead, you can build another device (possibly using a cheaper board, such as
 Arduino Uno), and use the
 [FakeSubaruBRZ example](https://github.com/timurrrr/arduino-CAN/tree/master/examples/FakeSubaruBRZ)
 from my fork of the `arduino-CAN` library, and connect the two boards into a
-small CAN network.
+small CAN network. Note that you don't need to use a jumper to connect the
+120 Ohm resistor on the second board in a CAN network (right?).
