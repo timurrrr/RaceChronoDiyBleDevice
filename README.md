@@ -83,6 +83,9 @@ Optionally, put everything into a nice enclosure.
 
 ## Testing
 
-You don't need to always be in the car to test changes to this library. Instead,
-you can use the FakeSubaruBRZ example from my fork of the `arduino-CAN` library
-on a second Arduino board, and connect the two boards into a small CAN network.
+You don't need to always be in the car to test changes.
+Instead, you can build another device (possibly using a cheaper board, such as
+Arduino Uno), and use the
+[FakeSubaruBRZ example](https://github.com/timurrrr/arduino-CAN/tree/master/examples/FakeSubaruBRZ)
+from my fork of the `arduino-CAN` library, and connect the two boards into a
+small CAN network.
