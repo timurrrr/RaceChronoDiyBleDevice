@@ -67,6 +67,8 @@ the board, and finish with a nice JST SM connector:
 
 Finally, put the MCP on the breadboard.
 
+![Assembled view](images/overall.jpg)
+
 Check connections:
 
 MCP pin | Microcontroller pin
