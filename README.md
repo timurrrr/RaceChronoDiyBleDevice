@@ -108,7 +108,7 @@ small CAN network. Note that you don't need to use a jumper to connect the
 
 ## Demo
 
-Here is a video demonstrating data acquired this device:
+Here is a video demonstrating data acquired using this device:
 [![Demo video](https://img.youtube.com/vi/Ct4L6gD2d5A/0.jpg)](https://www.youtube.com/watch?v=Ct4L6gD2d5A)
 
 [Here](https://www.ft86club.com/forums/showthread.php?p=3347436#post3347436)
