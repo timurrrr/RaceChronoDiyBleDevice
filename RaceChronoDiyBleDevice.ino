@@ -120,19 +120,18 @@ public:
     void *entry = pidMap.getEntryId(pid);
     if (entry != nullptr) {
       PidExtra *pidExtra = pidMap.getExtra(entry);
+      pidExtra->skippedUpdates = 0;
+
       switch (pid) {
       case 0xD0:
       case 0xD1:
         pidExtra->updateRateDivider = 2;
-        pidExtra->skippedUpdates = 0;
         break;
       case 0x140:
         pidExtra->updateRateDivider = 4;
-        pidExtra->skippedUpdates = 0;
         break;
        case 0x360:
         pidExtra->updateRateDivider = 20;
-        pidExtra->skippedUpdates = 0;
         break;
       }
     }

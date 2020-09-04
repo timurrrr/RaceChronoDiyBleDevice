@@ -40,8 +40,8 @@ Recommended parts list:
 * ~22 AWG wires
 
 First, solder the male headers to your microcontroller board.
-You'll need G, USB, SCK, MO, MI and 7.
-It's also recommended to solder 9, R and 3V for future improvements and
+You'll need G, 3V, SCK, MO, MI and 7.
+It's also recommended to solder 9, R and USB for future improvements and
 mechanical stability on the breadboard.
 Soldering male headers is a lot easier if you first insert them into a
 breadboard.
@@ -73,7 +73,7 @@ Check connections:
 
 MCP pin | Microcontroller pin
 ------- | ------------------
-VCC | USB
+VCC | 3V
 GND | G
 CS | 7
 SO | MI
