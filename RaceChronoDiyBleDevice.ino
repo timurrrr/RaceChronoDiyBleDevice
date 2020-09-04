@@ -24,10 +24,11 @@ long lastCanMessageReceivedMs;
 // In this implementation, we're going to ignore "update intervals" requested by
 // RaceChrono, and instead send every Nth CAN message we receive, per PID, where
 // N is different for different PIDs.
+const uint8_t DEFAULT_UPDATE_RATE_DIVIDER = 10;
+
 struct PidExtra {
   // Only send one out of |updateRateDivider| packets per PID.
-  // By default, send 1 out of 10 messages for each PID.
-  uint8_t updateRateDivider = 10;
+  uint8_t updateRateDivider = DEFAULT_UPDATE_RATE_DIVIDER;
 
   // Varies between 0 and |updateRateDivider - 1|.
   uint8_t skippedUpdates = 0;
@@ -50,7 +51,7 @@ void dumpMapToSerial() {
   bool areAllPidsAllowed =
       pidMap.areAllPidsAllowed(&updateIntervalForAllEntries);
   if (areAllPidsAllowed) {
-    Serial.print("  All PIDs are allowed.");
+    Serial.println("  All PIDs are allowed.");
   }
 
   if (pidMap.isEmpty()) {
@@ -116,23 +117,32 @@ public:
       Serial.println("WARNING: unable to handle this request!");
     }
 
-    // Customization for Subaru BRZ / Toyota 86 / Scion FR-S:
     void *entry = pidMap.getEntryId(pid);
     if (entry != nullptr) {
       PidExtra *pidExtra = pidMap.getExtra(entry);
       pidExtra->skippedUpdates = 0;
 
+      // Customizations for Subaru BRZ / Toyota 86 / Scion FR-S:
       switch (pid) {
+      // These are sent over the CAN bus 50 times per second, we want 25.
       case 0xD0:
       case 0xD1:
+      case 0xD4:
         pidExtra->updateRateDivider = 2;
         break;
+
+      // 0x140 is sent over the CAN bus 100 times per second, we want 25.
       case 0x140:
         pidExtra->updateRateDivider = 4;
         break;
-       case 0x360:
+
+      // 0x360 is sent over the CAN bus 20 times per second, we want 1.
+      case 0x360:
         pidExtra->updateRateDivider = 20;
         break;
+
+      default:
+        pidExtra->updateRateDivider = DEFAULT_UPDATE_RATE_DIVIDER;
       }
     }
 
@@ -199,7 +209,8 @@ bool startCanBusReader() {
 
   // These values are customized for Subaru BRZ / Toyota 86 / Scion FR-S.
   // TODO: generalize this? Figure out a good way to build this from the list of
-  // requested PIDs?
+  // requested PIDs? Or perhaps filtering is no longer needed after the recent
+  // stability improvements?
   if (!CAN.setFilterRegisters(
     /* mask0= */   0b11111111111 /* full match only */,
     /* filter0= */ 0xD1,
@@ -207,9 +218,9 @@ bool startCanBusReader() {
 
     /* mask1= */   0b11111111111 /* full match only */,
     /* filter2= */ 0xD0,
-    /* filter3= */ 0x360,
-    /* filter4= */ 0x360,  // Repeated filters don't matter.
-    /* filter5= */ 0x360,
+    /* filter3= */ 0xD4,
+    /* filter4= */ 0x360,
+    /* filter5= */ 0x360,  // Repeated filters don't matter.
     /* allowRollover= */ false)) {
     Serial.println("WARNING: Unable to set filter registers.");
     Serial.println("Trying to continue without filtering...");

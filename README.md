@@ -7,8 +7,8 @@ tweak the code for other cars.
 
 ## Supported Hardware
 
-* Adafruit Feather nRF52832
 * Adafruit ItsyBitsy nRF52840 Express
+* Adafruit Feather nRF52832
 * 16 MHz MCP2515 breakout boards (probably MCP25625 as well)
 
 ## Prerequisites
