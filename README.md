@@ -105,3 +105,11 @@ Arduino Uno), and use the
 from my fork of the `arduino-CAN` library, and connect the two boards into a
 small CAN network. Note that you don't need to use a jumper to connect the
 120 Ohm resistor on the second board in a CAN network (right?).
+
+## Demo
+
+Here is a video demonstrating data acquired this device:
+https://www.youtube.com/watch?v=Ct4L6gD2d5A
+
+Here is more info on how I got RaceChrono displayed on my headunit via Android
+Auto: https://www.ft86club.com/forums/showthread.php?p=3347436#post3347436
