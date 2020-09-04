@@ -2,19 +2,19 @@
 #include <RaceChrono.h>
 
 // Connections:
-//  BOARD | MCP2515
-//    USB   VCC
-//    GND   GND
-//  Pin 7   CS
-//  Pin 9   INT  // Unconnected is fine too, we don't use interrupts here.
-//     MO   SI
-//     MI   SO
-//    SCK   SCK
+//  MCP | BOARD
+//  INT | Not used, can connect to Pin 9
+//  SCK | SCK
+//   SI | MO
+//   SO | MI
+//   CS | Pin 7
+//  GND | GND
+//  VCC | 3.3V
 const int CS_PIN = 7;
 const int IRQ_PIN = 9;
 
 const long QUARTZ_CLOCK_FREQUENCY = 16 * 1E6;  // 16 MHz.
-const uint32_t SPI_FREQUENCY = 8 * 1E6;  // 8 MHz.
+const uint32_t SPI_FREQUENCY = 10 * 1E6;  // 10 MHz.
 const long BAUD_RATE = 500 * 1E3;  // 500k.
 
 bool isCanBusReaderActive = false;
