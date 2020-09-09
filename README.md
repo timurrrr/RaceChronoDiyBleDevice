@@ -5,6 +5,15 @@ There are some optimizations in the code that are specific to the FT86 platform
 cars (Subaru BRZ, Toyota 86, Scion FR-S), but it should be straightforward to
 tweak the code for other cars.
 
+## Demo
+
+Here is a video demonstrating data acquired using this device:
+[![Demo video](https://img.youtube.com/vi/Ct4L6gD2d5A/0.jpg)](https://www.youtube.com/watch?v=Ct4L6gD2d5A)
+
+[Here](https://www.ft86club.com/forums/showthread.php?p=3347436#post3347436)
+is a post with more info on how I got RaceChrono displayed on my headunit via
+Android Auto.
+
 ## Supported Hardware
 
 * Adafruit ItsyBitsy nRF52840 Express
@@ -105,12 +114,3 @@ Arduino Uno), and use the
 from my fork of the `arduino-CAN` library, and connect the two boards into a
 small CAN network. Note that you don't need to use a jumper to connect the
 120 Ohm resistor on the second board in a CAN network (right?).
-
-## Demo
-
-Here is a video demonstrating data acquired using this device:
-[![Demo video](https://img.youtube.com/vi/Ct4L6gD2d5A/0.jpg)](https://www.youtube.com/watch?v=Ct4L6gD2d5A)
-
-[Here](https://www.ft86club.com/forums/showthread.php?p=3347436#post3347436)
-is a post with more info on how I got RaceChrono displayed on my headunit via
-Android Auto.
