@@ -37,11 +37,15 @@ RaceChronoPidMap<PidExtra> pidMap;
 
 uint32_t loop_iteration = 0;
 
+uint32_t last_time_num_can_bus_timeouts_sent_ms = 0;
+uint16_t num_can_bus_timeouts = 0;
+
 // Forward declarations to help put code in a natural reading order.
 void waitForConnection();
 void bufferNewPacket(uint32_t pid, uint8_t *data, uint8_t data_length);
 void handleOneBufferedPacket();
 void flushBufferedPackets();
+void sendNumCanBusTimeouts();
 void resetSkippedUpdatesCounters();
 
 void dumpMapToSerial() {
@@ -268,6 +272,7 @@ void loop() {
 
     Serial.println("Waiting for a new connection.");
     waitForConnection();
+    sendNumCanBusTimeouts();
   }
 
   while (!isCanBusReaderActive) {
@@ -283,10 +288,12 @@ void loop() {
   uint32_t timeNowMs = millis();
 
   // I've observed that MCP2515 has a tendency to just stop responding for some
-  // weird reason. Just kill it if we don't have any data for 50 ms. The timeout
-  // might need to be tweaked for some cars.
-  if (timeNowMs - lastCanMessageReceivedMs > 50) {
+  // weird reason. Just kill it if we don't have any data for 100 ms. The
+  // timeout might need to be tweaked for some cars.
+  if (timeNowMs - lastCanMessageReceivedMs > 100) {
     Serial.println("ERROR: CAN bus timeout, aborting.");
+    num_can_bus_timeouts++;
+    sendNumCanBusTimeouts();
     stopCanBusReader();
     return;
   }
@@ -330,6 +337,10 @@ void loop() {
   }
 
   handleOneBufferedPacket();
+
+  if (millis() - last_time_num_can_bus_timeouts_sent_ms > 2000) {
+    sendNumCanBusTimeouts();
+  }
 }
 
 struct BufferedMessage {
@@ -394,6 +405,16 @@ void handleOneBufferedPacket() {
 void flushBufferedPackets() {
   bufferToWriteTo = 0;
   bufferToReadFrom = 0;
+}
+
+void sendNumCanBusTimeouts() {
+  // Send the count of timeouts to RaceChrono in a "fake" PID=0x777 message.
+  uint8_t data[2];
+  data[0] = num_can_bus_timeouts & 0xff;
+  data[1] = num_can_bus_timeouts >> 8;
+  RaceChronoBle.sendCanData(0x777, data, 2);
+
+  last_time_num_can_bus_timeouts_sent_ms = millis();
 }
 
 void resetSkippedUpdatesCounters() {
