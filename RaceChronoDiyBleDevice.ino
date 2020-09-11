@@ -124,16 +124,31 @@ public:
 
       // Customizations for Subaru BRZ / Toyota 86 / Scion FR-S:
       switch (pid) {
-      // These are sent over the CAN bus 50 times per second, we want 25.
-      case 0xD0:
-      case 0xD1:
-      case 0xD4:
-        pidExtra->updateRateDivider = 2;
+      // These are sent over the CAN bus 100 times per second, we want 25.
+      case 0x18:
+      case 0x140:
+      case 0x141:
+      case 0x142:
+        pidExtra->updateRateDivider = 4;
         break;
 
-      // 0x140 is sent over the CAN bus 100 times per second, we want 25.
-      case 0x140:
-        pidExtra->updateRateDivider = 4;
+      // This is sent over the CAN bus 50 times per second and includes brake
+      // system pressure. It's useful to have this at the highest update rate
+      // possible, as braking can be very short, e.g. at autocross.
+      case 0xD1:
+        pidExtra->updateRateDivider = 1;
+        break;
+
+      // These are sent over the CAN bus 50 times per second, we want 25.
+      case 0xD0:
+      case 0xD2:
+      case 0xD3:
+      case 0xD4:
+      case 0x144:
+      case 0x152:
+      case 0x156:
+      case 0x280:
+        pidExtra->updateRateDivider = 2;
         break;
 
       // 0x360 is sent over the CAN bus 20 times per second, we want 1.
