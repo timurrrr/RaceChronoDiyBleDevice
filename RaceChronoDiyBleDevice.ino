@@ -1,6 +1,8 @@
 #include <CAN.h>
 #include <RaceChrono.h>
 
+#define DEVICE_NAME "BLE CAN device demo"
+
 // Connections:
 //  MCP | BOARD
 //  INT | Not used, can connect to Pin 9
@@ -185,7 +187,7 @@ void setup() {
   }
 
   Serial.println("Setting up BLE...");
-  RaceChronoBle.setUp("BLE CAN device demo", &raceChronoHandler);
+  RaceChronoBle.setUp(DEVICE_NAME, &raceChronoHandler);
   RaceChronoBle.startAdvertising();
 
   Serial.println("BLE is set up, waiting for an incoming connection.");
