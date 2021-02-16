@@ -130,22 +130,21 @@ public:
 
       // Customizations for MX5 NC 2007 - 2015 with ESC moduòe:
       switch (pid) {
-      // These are sent over the CAN bus 100 times per second, we want 50.
+      // These are sent over the CAN bus 100 times per second, we want 25.
       case 0x201: /* RPM, Vehicle Speed, Accelerator position */
       case 0x4b0: /* 4 wheels speed */
       case 0x081: /* steering angle */
-      case 0x085: /* brake switch and braking pressure */
       case 0x200: /* Throttle Positon (it is also available in ID 215) */
-        pidExtra->updateRateDivider = 2;
+        pidExtra->updateRateDivider = 4;
         break;
 
       // This is sent over the CAN bus 100 times per second and includes brake
       // system pressure. It's useful to have this at the highest update rate
-      // possible, as braking can be very short, e.g. at autocross.
-      /* case 0x085:
-        pidExtra->updateRateDivider = 1;
-        break; */
-
+      // possible, as braking can be very short, e.g. at autocross. We want 50 (for now)
+       case 0x085: /* brake switch and braking pressure */
+        pidExtra->updateRateDivider = 2;
+        break;
+          
       // These are sent over the CAN bus 40 times per second, we want 20.
       case 0x231: /* clutch switch */
         pidExtra->updateRateDivider = 2;
