@@ -14,6 +14,20 @@ Here is a video demonstrating data acquired using this device:
 is a post with more info on how I got RaceChrono displayed on my headunit via
 Android Auto.
 
+## Safety disclaimer
+
+CAN bus is like a "nervous system" in a car. It is a network that connects
+various ECUs, sensors, etc. Connecting a new device to this network poses risks
+such as data corruption, packet losses, etc., that can negatively affect the
+performance of some or all components of your car. Same applies to incorrect
+connections and alternations of the CAN bus wiring. This can cause various
+undesirable effects, such as "Check engine" lights, electrical and mechanical
+damage, loss of control, injuries and even death.
+
+By using this project you assume any and all risk assosciated with using the
+described DIY devices, and release any liability from the author(s) and
+controbutors to this project.
+
 ## Supported Hardware
 
 * Adafruit ItsyBitsy nRF52840 Express
@@ -114,3 +128,26 @@ Arduino Uno), and use the
 from my fork of the `arduino-CAN` library, and connect the two boards into a
 small CAN network. Note that you don't need to use a jumper to connect the
 120 Ohm resistor on the second board in a CAN network (right?).
+
+## Contributions
+
+I'd be happy to add more info on the CAN protocol for other popular sport cars.
+Feel free to send pull requests!
+
+## Support the project
+
+I hope you found this project useful, entertaining, educating, etc.
+Personally, I was amazed that for just ~$50 it's possible to get a data logging
+system comparable to the "go to" devices that HPDE enthusasts use that cost 10x+
+more. And since the "brain" of such a data acquisition system is RaceChrono, you
+don't need to fiddle with cables, laptops, etc. to review your data when you
+come back to the pits between sessions.
+
+Having said that, I've spent a few too many evenings on this project, and this
+is not my paid job. I have some more exciting ideas on how to further improve
+this project, make it more accessible, support more car models... but can't
+justify spending too much more time on it. If you want to thank me for what I've
+already shared, or support my future ideas, I will appreciate if you send me
+some "boba tea money". Here's a PayPal shortcut for your convenience:
+
+[![paypal](https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif)](https://www.paypal.com/donate?business=ZKULAWZFJKCES&item_name=Donation+to+support+the+RaceChronoDiyBleDevice+project&currency_code=USD)
