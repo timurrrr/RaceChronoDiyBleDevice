@@ -147,6 +147,8 @@ is not my paid job. I have some more exciting ideas on how to further improve
 this project, make it more accessible, support more car models... but can't
 justify spending too much more time on it. If you want to thank me for what I've
 already shared, or support my future ideas, I will appreciate it if you send me
-some "boba tea money". Here's a PayPal shortcut for your convenience:
+some "boba tea money".
+
+Here's a PayPal shortcut for your convenience:
 
 [![paypal](https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif)](https://www.paypal.com/donate?business=ZKULAWZFJKCES&item_name=Donation+to+support+the+RaceChronoDiyBleDevice+project&currency_code=USD)
