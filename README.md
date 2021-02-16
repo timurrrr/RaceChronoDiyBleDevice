@@ -24,9 +24,8 @@ connections and alternations of the CAN bus wiring. This can cause various
 undesirable effects, such as "Check engine" lights, electrical and mechanical
 damage, loss of control, injuries and even death.
 
-By using this project you assume any and all risk assosciated with using the
-described DIY devices, and release any liability from the author(s) and
-controbutors to this project.
+By using any information or code in this project you assume any and all risk,
+and release any liability from the author(s) and contributors to this project.
 
 ## Supported Hardware
 
