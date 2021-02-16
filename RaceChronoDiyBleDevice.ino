@@ -128,38 +128,32 @@ public:
       PidExtra *pidExtra = pidMap.getExtra(entry);
       pidExtra->skippedUpdates = 0;
 
-      // Customizations for Subaru BRZ / Toyota 86 / Scion FR-S:
+      // Customizations for MX5 NC 2007 - 2015 with ESC moduòe:
       switch (pid) {
-      // These are sent over the CAN bus 100 times per second, we want 25.
-      case 0x18:
-      case 0x140:
-      case 0x141:
-      case 0x142:
-        pidExtra->updateRateDivider = 4;
-        break;
-
-      // This is sent over the CAN bus 50 times per second and includes brake
-      // system pressure. It's useful to have this at the highest update rate
-      // possible, as braking can be very short, e.g. at autocross.
-      case 0xD1:
-        pidExtra->updateRateDivider = 1;
-        break;
-
-      // These are sent over the CAN bus 50 times per second, we want 25.
-      case 0xD0:
-      case 0xD2:
-      case 0xD3:
-      case 0xD4:
-      case 0x144:
-      case 0x152:
-      case 0x156:
-      case 0x280:
+      // These are sent over the CAN bus 100 times per second, we want 50.
+      case 0x201: /* RPM, Vehicle Speed, Accelerator position */
+      case 0x4b0: /* 4 wheels speed */
+      case 0x081: /* steering angle */
+      case 0x085: /* brake switch and braking pressure */
+      case 0x200: /* Throttle Positon (it is also available in ID 215) */
         pidExtra->updateRateDivider = 2;
         break;
 
-      // 0x360 is sent over the CAN bus 20 times per second, we want 1.
-      case 0x360:
-        pidExtra->updateRateDivider = 20;
+      // This is sent over the CAN bus 100 times per second and includes brake
+      // system pressure. It's useful to have this at the highest update rate
+      // possible, as braking can be very short, e.g. at autocross.
+      /* case 0x085:
+        pidExtra->updateRateDivider = 1;
+        break; */
+
+      // These are sent over the CAN bus 40 times per second, we want 20.
+      case 0x231: /* clutch switch */
+        pidExtra->updateRateDivider = 2;
+        break;
+
+      // These are is sent over the CAN bus 10 times per second, we want 1.
+      case 0x240: /* calculated load, cooling water temperature, spark advance, throttle position 1, intake air temperature */
+        pidExtra->updateRateDivider = 10;
         break;
 
       default:
@@ -234,14 +228,14 @@ bool startCanBusReader() {
   // stability improvements?
   if (!CAN.setFilterRegisters(
     /* mask0= */   0b11111111111 /* full match only */,
-    /* filter0= */ 0xD1,
-    /* filter1= */ 0x140,
+    /* filter0= */ 0x201,
+    /* filter1= */ 0x085,
 
     /* mask1= */   0b11111111111 /* full match only */,
-    /* filter2= */ 0xD0,
-    /* filter3= */ 0xD4,
-    /* filter4= */ 0x360,
-    /* filter5= */ 0x360,  // Repeated filters don't matter.
+    /* filter2= */ 0x4b0,
+    /* filter3= */ 0x200,
+    /* filter4= */ 0x081,
+    /* filter5= */ 0x231,
     /* allowRollover= */ false)) {
     Serial.println("WARNING: Unable to set filter registers.");
     Serial.println("Trying to continue without filtering...");
