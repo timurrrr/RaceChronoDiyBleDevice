@@ -1,8 +1,8 @@
 # RaceChronoDiyBleDevice
 DIY BLE device for RaceChrono, currently supports reading data from the CAN bus.
 
-There are some optimizations in the code that are specific to the FT86 platform
-cars (Subaru BRZ, Toyota 86, Scion FR-S), but it should be straightforward to
+This fork from timurrrr work is implementing CAN IDs specific to the MX-5 3rd generation (NC, NCFL, NCFLFL).
+IDs 085 and 081 are specific to cars with DSC, but it should be straightforward to
 tweak the code for other cars.
 
 ## Demo
