@@ -67,7 +67,7 @@ connections:
 
 ![Breadboard with jumpers](images/board_with_jumpers.jpg)
 
-OPTIONAL: this is is an update to use the 12V-5V stepdown
+OPTIONAL: this is is an alternative to use the 12V-5V stepdown and power from OBD port
 
 ![Breadboard with jumpers optional](images/board_esposed_jumpers.jpg)
 
@@ -90,7 +90,7 @@ Finally, put the MCP on the breadboard.
 
 ![Assembled view](images/overall.jpg)
 
-Here with optional 12V to 5V converter and OBD port connections
+Here with optional 12V to 5V converter for power from car
 ![Assembled view optional](images/assembled_board.jpg)
 
 Check connections:
@@ -106,7 +106,7 @@ SCK | SCK
 INT | Currently unused, may use 9 in the future
 
 Optional Connections with 12V to 5V stepdown
-MCP pin | Microcontroller pin | OBD pin
+Stepdown pin | Microcontroller pin | OBD pin
 ------- | ------------------ | --------
 VIN | - | 16
 VOUT | BAT | -
