@@ -113,13 +113,15 @@ VOUT | BAT | -
 GND | G | 4 and 5 
 
 For OBD pin refer to this pinout diagram
+
 ![OBD pinout](https://upload.wikimedia.org/wikipedia/commons/c/c7/OBD_connector_shape.svg)
+
 this showed here is the front view of the female connector, that is a perfect
 match for the back of a male connector.
-Pin 4 and 5 (grey) are chassis ground and signal ground, black cable in picture below
-Pin 6 (green, top) is CAN High, green cable in picture below
-Pin 14 (green, bottom) is CAN Low, yellow cable in picture below
-Pin 16 (red) is 12V power from battery, red cable in picture below
+* Pin 4 and 5 (grey) are chassis ground and signal ground, black cable in picture below
+* Pin 6 (green, top) is CAN High, green cable in picture below
+* Pin 14 (green, bottom) is CAN Low, yellow cable in picture below
+* Pin 16 (red) is 12V power from battery, red cable in picture below
 
 ![Assembled view with OBD connection](images/board_obd_box.jpg)
 
