@@ -5,16 +5,6 @@ This fork from timurrrr work is implementing CAN IDs specific to the MX-5 3rd ge
 IDs 085 and 081 are specific to cars with DSC, but it should be straightforward to
 tweak the code for other cars.
 
-## Demo
-
-Here is a video demonstrating data acquired using this device:
-
-[![Demo video](https://img.youtube.com/vi/j01LALSN7dQ/0.jpg)](https://www.youtube.com/watch?v=j01LALSN7dQ)
-
-[Here](https://www.ft86club.com/forums/showthread.php?p=3347436#post3347436)
-is a post with more info on how I got RaceChrono displayed on my headunit via
-Android Auto.
-
 ## Safety disclaimer
 
 CAN bus is like a "nervous system" in a car. It is a network that connects
@@ -61,9 +51,12 @@ Recommended parts list:
 * [JST SM connectors](https://www.amazon.com/gp/product/B07QG2TN1X/)
 * Crimping tool for JST connectors
 * ~22 AWG wires
+* OPTIONAL: OBD male connector
+* OPTIONAL: 12V to 5V stepdown DC DC converter to draw power from OBD pin 16
 
 First, solder the male headers to your microcontroller board.
 You'll need G, 3V, SCK, MO, MI and 7.
+OPTIONAL: I've soldered also a pin for "BAT" to send the power from 12V - 5V stepdown
 It's also recommended to solder 9, R and USB for future improvements and
 mechanical stability on the breadboard.
 Soldering male headers is a lot easier if you first insert them into a
@@ -74,12 +67,17 @@ connections:
 
 ![Breadboard with jumpers](images/board_with_jumpers.jpg)
 
+OPTIONAL: this is is an update to use the 12V-5V stepdown
+
+![Breadboard with jumpers optional](images/board_esposed_jumpers.jpg)
+
 Then, put the microcontroller board on the breadboard:
 
 ![Adafruit ItsyBitsy nRF52840 Express on the breadboard](images/nRF_on_board.jpg)
 
 Un-solder the header from the MCP board and solder a new header on the other
 side of the board to make it more breadboard-friendly.
+This step is copletely optional and only needed to improve the compactness of the assembly
 
 Replace the 8 MHz quartzes on your MCPs with 16 MHz quartzes, if needed.
 Install the jumper that connects the 120 Ohm terminal resistor.
@@ -91,6 +89,9 @@ the board, and finish with a nice JST SM connector:
 Finally, put the MCP on the breadboard.
 
 ![Assembled view](images/overall.jpg)
+
+Here with optional 12V to 5V converter and OBD pprt connections
+![Assembled view optional](images/assembled_board.jpg)
 
 Check connections:
 
@@ -104,20 +105,36 @@ SI | MO
 SCK | SCK
 INT | Currently unused, may use 9 in the future
 
-Optionally, put everything into a nice enclosure.
+Optional Connections with 12V to 5V stepdown
+MCP pin | Microcontroller pin | OBD pin
+------- | ------------------ | --------
+VIN | - | 16
+VOUT | BAT | -
+GND | G | 4 and 5 
+
+For OBD pin refer to this pinout diagram
+https://upload.wikimedia.org/wikipedia/commons/c/c7/OBD_connector_shape.svg
+this showed here is the front view of the female connector, that is a perfect
+match for the back of a male connector.
+Pin 4 and 5 (grey) are chassis ground and signal ground, black cable in picture below
+Pin 6 (green, top) is CAN High, green cable in picture below
+Pin 14 (green, bottom) is CAN Low, yellow cable in picture below
+Pin 16 (red) is 12V power from battery, red cable in picture below
+
+![Assembled view with OBD connection](images/board_obd_box.jpg)
+
+Just remember that there is always power at pin 16 on OBD, even if the
+car is shut down with no key.
+
+Optionally, put everything into a nice enclosure, possibly not cardboard :D
+
 
 ## Tweaking to work with your car
 
-This particular example is optimized to work with FT86 cars (Subaru BRZ,
-Toyota 86, Scion FR-S). You can search for "BRZ" in the source code to see where
+This particular example is optimized to work with Mazda MX5 2010 third generation
+with DSC
+You can search for "MX5" in the source code to see where
 the customizations were made, and tweak to work better with your car.
-
-If you do have an FT86 car, you might want to read [the info](can_db/ft86.md) on
-messages that these cars are known to send over their CAN network.
-
-It might be nice to make these customizations programmable via a mobile app and
-store the preferences in the flash storage of the nRF52840, but currently this
-has not been implemented to keep the code minimalistic and easier to read.
 
 ## Testing
 
@@ -135,6 +152,8 @@ I'd be happy to add more info on the CAN protocol for other popular sport cars.
 Feel free to send pull requests!
 
 ## Support the project
+
+Support timurrrr https://github.com/timurrrr/
 
 I hope you found this project useful, entertaining, educating, etc.
 Personally, I was amazed that for just ~$50 it's possible to get a data logging
