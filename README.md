@@ -90,7 +90,7 @@ Finally, put the MCP on the breadboard.
 
 ![Assembled view](images/overall.jpg)
 
-Here with optional 12V to 5V converter and OBD pprt connections
+Here with optional 12V to 5V converter and OBD port connections
 ![Assembled view optional](images/assembled_board.jpg)
 
 Check connections:
@@ -113,7 +113,7 @@ VOUT | BAT | -
 GND | G | 4 and 5 
 
 For OBD pin refer to this pinout diagram
-https://upload.wikimedia.org/wikipedia/commons/c/c7/OBD_connector_shape.svg
+![OBD pinout](https://upload.wikimedia.org/wikipedia/commons/c/c7/OBD_connector_shape.svg)
 this showed here is the front view of the female connector, that is a perfect
 match for the back of a male connector.
 Pin 4 and 5 (grey) are chassis ground and signal ground, black cable in picture below
