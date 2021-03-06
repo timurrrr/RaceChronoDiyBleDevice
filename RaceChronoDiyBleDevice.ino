@@ -135,7 +135,7 @@ public:
       case 0x4b0: /* 4 wheels speed */
       case 0x081: /* steering angle */
       case 0x200: /* Throttle Positon (it is also available in ID 215) */
-      case 0x090: /* lateral g */
+      /* case 0x090: */ /* IN PROGRESS */
         pidExtra->updateRateDivider = 4;
         break;
 
@@ -233,10 +233,9 @@ bool startCanBusReader() {
 
     /* mask1= */   0b11111111111 /* full match only */,
     /* filter2= */ 0x4b0,
-    /* filter3= */ 0x090,
-    /* filter4= */ 0x200,
-    /* filter5= */ 0x081,
-    /* filter6= */ 0x231,
+    /* filter3= */ 0x200,
+    /* filter4= */ 0x081,
+    /* filter5= */ 0x231,
     /* allowRollover= */ false)) {
     Serial.println("WARNING: Unable to set filter registers.");
     Serial.println("Trying to continue without filtering...");
