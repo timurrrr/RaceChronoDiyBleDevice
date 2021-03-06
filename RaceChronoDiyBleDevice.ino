@@ -222,7 +222,7 @@ bool startCanBusReader() {
 
   Serial.println("Success!");
 
-  // These values are customized for Subaru BRZ / Toyota 86 / Scion FR-S.
+  // These values are customized for Mazda MX5 NC.
   // TODO: generalize this? Figure out a good way to build this from the list of
   // requested PIDs? Or perhaps filtering is no longer needed after the recent
   // stability improvements?
