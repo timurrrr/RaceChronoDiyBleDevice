@@ -44,7 +44,7 @@ Byte | Meaning
 Channel name | Equation | Notes
 ------------ | -------- | -----
 Brake pressure | `(3.4518689053*bytesToInt(raw, 0, 2)-327.27)/1000.00` | multipliers are desumed by data from Leisutrhound user on miata.net, may be wrong. Unit is kPa
-Brake percentage | `min(0.2*(bytesToInt(raw, 0, 2)-102),100` | this is an alternative to get brake percentage. When not pressed the value is 102, after braking and releasing it goes briefli down to 99
+Brake percentage | `min(0.2*(bytesToInt(raw, 0, 2)-102),100)` | this is an alternative to get brake percentage. When not pressed the value is 102, after braking and releasing it goes briefli down to 99
 Digital | `bitsToUint(raw,17,1)` | can't find in RaceChrono the proper channel for brake switch.
 
 
