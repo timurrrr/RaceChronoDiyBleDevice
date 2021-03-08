@@ -42,8 +42,8 @@ Byte | Meaning
 
 Channel name | Equation | Notes
 ------------ | -------- | -----
-Brake pressure | `(3.4518689053*bytesToInt(raw, 0, 2)-327.27)/1000.00` | multipliers are desumed by data from Leisutrhound user on miata.net, may be wrong. Unit is kPa
-Brake percentage | `min(0.2*(bytesToInt(raw, 0, 2)-102),100)` | this is an alternative to get brake percentage. When not pressed the value is 102, after braking and releasing it goes briefli down to 99
+Brake pressure | `(3.4518689053*bytesToInt(raw, 0, 2)-327.27)/1000.00` | multipliers are obtained from data from Leisurehound user on miata.net, may be wrong. Unit is kPa
+Brake percentage | `min(0.2*(bytesToInt(raw, 0, 2)-102),100)` | this is an alternative to get brake percentage. When not pressed the value is 102, after braking and releasing it goes briefly down to 99 so you may see slightly negative percentage.
 Digital | `bitsToUint(raw,17,1)/2` | 0-1 value
 
 ## PID 0x090
@@ -60,7 +60,7 @@ Byte | Meaning
 2 | WIP
 3 | WIP
 4 | WIP
-5 | WIp
+5 | WIP
 6 | WIP
 7 | WIP
 
@@ -82,7 +82,7 @@ Byte | Meaning
 2 | WIP
 3 | WIP
 4 | WIP
-5 | WIp
+5 | WIP
 6 | WIP
 7 | Throttle Valve Position
 
@@ -94,8 +94,8 @@ Throttle Position | `bytestouint(raw,7,1)*100/255.00` | Scale may need adjustmen
 
 Update frequency: 100 times per second.
 
-`0x201` This PID is realted to engine speed, vehicle speed
-and accelearator position.
+`0x201` This PID is related to engine speed, vehicle speed
+and accelerator position.
 
 Byte | Meaning
 ---- | -------
@@ -103,8 +103,8 @@ Byte | Meaning
 1 | With byte 0 represent engine speed
 2 | WIP: together with byte 3, follows RPM
 3 | WIP: together with byte 2, follows RPM
-4 | With byte 5 represente vehicle speed
-5 | With byte 4 represente vehicle speed
+4 | With byte 5 represent vehicle speed
+5 | With byte 4 represent vehicle speed
 6 | Accelerator pedal position [%]
 7 | Always FF
 
@@ -236,4 +236,3 @@ parking lot:
 4F0 | 1264 | 10
 4F1 | 1265 | 10
 4FF | 1279 | 100
-
