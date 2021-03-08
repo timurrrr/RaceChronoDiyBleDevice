@@ -233,7 +233,7 @@ bool startCanBusReader() {
 
     /* mask1= */   0b11111111111 /* full match only */,
     /* filter2= */ 0x4b0,
-    /* filter3= */ 0x200,
+    /* filter3= */ 0x240,
     /* filter4= */ 0x081,
     /* filter5= */ 0x231,
     /* allowRollover= */ false)) {
