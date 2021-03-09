@@ -51,13 +51,13 @@ Recommended parts list:
 * [~22 AWG wires ](https://amzn.to/38nxNwW)
 * [JST SM connectors](https://www.amazon.com/gp/product/B07QG2TN1X/) **NOT NEEDED IF YOU DO THE OBD CONNECTOR ALTERNATIVE**
 * Crimping tool for JST connectors **NOT NEEDED IF YOU DO THE OBD CONNECTOR ALTERNATIVE**
-ALTERNATIVE: 
+**ALTERNATIVE:**
 * [OBD male connector](https://amzn.to/3l5thsf)
 * [12V to 5V stepdown DC DC converter to draw power from OBD pin 16](https://amzn.to/3qvYfuy)
 
 First, solder the male headers to your microcontroller board.
 You'll need G, 3V, SCK, MO, MI and 7.
-OPTIONAL: I've soldered also a pin for "BAT" to send the power from 12V - 5V stepdown
+**ALTERNATIVE:** I've soldered also a pin for "BAT" to send the power from 12V - 5V stepdown
 It's also recommended to solder 9, R and USB for future improvements and
 mechanical stability on the breadboard.
 Soldering male headers is a lot easier if you first insert them into a
@@ -68,7 +68,7 @@ connections:
 
 ![Breadboard with jumpers](images/board_with_jumpers.jpg)
 
-OPTIONAL: this is is an alternative to use the 12V-5V stepdown and power from OBD port
+**ALTERNATIVE:** here with the 12V-5V stepdown to get power from OBD port
 
 ![Breadboard with jumpers optional](images/board_esposed_jumpers.jpg)
 
@@ -91,7 +91,7 @@ Finally, put the MCP on the breadboard.
 
 ![Assembled view](images/overall.jpg)
 
-Here with 12V to 5V converter for getting power from car
+**ALTERNATIVE**: Here with 12V to 5V converter for getting power from car
 ![Assembled view optional](images/assembled_board.jpg)
 
 Check connections:
