@@ -43,16 +43,17 @@ those have not been reviewed at the time of writing.
 Recommended parts list:
 
 * [Adafruit ItsyBitsy nRF52840 Express](https://www.adafruit.com/product/4481)
-* [MCP2515 boards](https://www.amazon.com/gp/product/B07J9KZ4L4/) (2+ pcs recommended so you can test without a car)
-* [16 MHz quarz oscillators](https://www.amazon.com/gp/product/B00NQ82OM0/) (in case your MCPs have 8 MHz quartzes)
-* [Jumper](https://www.sparkfun.com/products/9044) (in case your MCP comes without it, like mine)
-* [Mini Breadboard](https://www.sparkfun.com/products/12047)
-* [Jumper wires](https://www.sparkfun.com/products/124)
-* [JST SM connectors](https://www.amazon.com/gp/product/B07QG2TN1X/)
-* Crimping tool for JST connectors
-* ~22 AWG wires
-* OPTIONAL: OBD male connector
-* OPTIONAL: 12V to 5V stepdown DC DC converter to draw power from OBD pin 16
+* [MCP2515 boards](https://www.amazon.com/gp/product/B07J9KZ4L4/) (2+ pcs recommended so you can test without a car). [Link alternativo ad AMAZON ITALIA](https://amzn.to/3ejeWqR).
+* [16 MHz quarz oscillators](https://www.amazon.com/gp/product/B00NQ82OM0/) (in case your MCPs have 8 MHz quartzes). [Link alternativo ad AMAZON ITALIA](https://amzn.to/3eh4CzE).
+* [Jumper](https://www.sparkfun.com/products/9044) (in case your MCP comes without it, like mine).. [Link alternativo ad AMAZON ITALIA, include anche pin header](https://amzn.to/3eq9LW2)
+* [Mini Breadboard](https://www.sparkfun.com/products/12047). [Link alternativo ad AMAZON ITALIA](https://amzn.to/3bw2Wk6).
+* [Jumper wires](https://www.sparkfun.com/products/124). [Link alternativo ad AMAZON ITALIA](https://amzn.to/3t1Jql9)
+* [~22 AWG wires ](https://amzn.to/38nxNwW)
+* [JST SM connectors](https://www.amazon.com/gp/product/B07QG2TN1X/) **NOT NEEDED IF YOU DO THE OBD CONNECTOR ALTERNATIVE**
+* Crimping tool for JST connectors **NOT NEEDED IF YOU DO THE OBD CONNECTOR ALTERNATIVE**
+ALTERNATIVE: 
+* [OBD male connector](https://amzn.to/3l5thsf)
+* [12V to 5V stepdown DC DC converter to draw power from OBD pin 16](https://amzn.to/3qvYfuy)
 
 First, solder the male headers to your microcontroller board.
 You'll need G, 3V, SCK, MO, MI and 7.
@@ -90,7 +91,7 @@ Finally, put the MCP on the breadboard.
 
 ![Assembled view](images/overall.jpg)
 
-Here with optional 12V to 5V converter for power from car
+Here with 12V to 5V converter for getting power from car
 ![Assembled view optional](images/assembled_board.jpg)
 
 Check connections:
@@ -105,7 +106,7 @@ SI | MO
 SCK | SCK
 INT | Currently unused, may use 9 in the future
 
-Optional Connections with 12V to 5V stepdown
+Connections with 12V to 5V stepdown
 Stepdown pin | Microcontroller pin | OBD pin
 ------- | ------------------ | --------
 VIN | - | 16
@@ -142,9 +143,9 @@ the customizations were made, and tweak to work better with your car.
 
 You don't need to always be in the car to test changes.
 Instead, you can build another device (possibly using a cheaper board, such as
-Arduino Uno), and use the
+Arduino Uno), and edit the
 [FakeSubaruBRZ example](https://github.com/timurrrr/arduino-CAN/tree/master/examples/FakeSubaruBRZ)
-from my fork of the `arduino-CAN` library, and connect the two boards into a
+from timurrrr fork of the `arduino-CAN` library, and connect the two boards into a
 small CAN network. Note that you don't need to use a jumper to connect the
 120 Ohm resistor on the second board in a CAN network (right?).
 
