@@ -15,8 +15,8 @@ Byte | Meaning
 ---- | -------
 0 | unidentified
 1 | on/off (EF/6F or 11101111/01101111)
-2 | together with byte 3 represent the signed values for the steering angle
-3 | together with byte 2 represent the signed values for the steering angle
+2 & 3| signed values for the steering angle
+
 
 Channel name | Equation | Notes
 ------------ | -------- | -----
@@ -31,8 +31,7 @@ cars with DSC module, so all cars from 2007 onwards.
 
 Byte | Meaning
 ---- | -------
-0 | together with byte 1 represent the pressure of the braking system
-1 | together with byte 0 represent the pressure of the braking system
+0 & 1 | together with byte 1 represent the pressure of the braking system
 2 | brake siwtch ON/OFF, information contained in bit 0 (MSB, from left)
 3 | Not changing
 4 | Not changing
@@ -84,7 +83,7 @@ Byte | Meaning
 4 | WIP
 5 | WIP
 6 | WIP
-7 | Throttle Valve Position
+7 | Throttle Valve Position (%)
 
 Channel name | Equation | Notes
 ------------ | -------- | -----
@@ -101,11 +100,9 @@ Byte | Meaning
 ---- | -------
 0 | With byte 1 represent engine speed
 1 | With byte 0 represent engine speed
-2 | WIP: together with byte 3, follows RPM
-3 | WIP: together with byte 2, follows RPM
-4 | With byte 5 represent vehicle speed
-5 | With byte 4 represent vehicle speed
-6 | Accelerator pedal position [%]
+2 & 3| WIP: follows RPM
+4 & 5 | represent vehicle speed
+6 | Accelerator pedal position (%)
 7 | Always FF
 
 Channel name | Equation | Notes
@@ -129,7 +126,7 @@ Byte | Meaning
 3 | WIP
 4 | WIP
 5 | WIP
-6 | Throttle Valve Position [%]
+6 | Throttle Valve Position (%)
 7 | WIP
 
 Channel name | Equation | Notes
@@ -178,7 +175,7 @@ Byte | Meaning
 4 | Intake Air Temperature (°C)
 5 | Always 00
 6 | Always 00
-7 | Always 00 (may contain faults)
+7 | Always 00 (faults?)
 
 Channel name | Equation | Notes
 ------------ | -------- | -----
@@ -196,10 +193,10 @@ Update frequency: 100 times per second.
 
 Byte | Meaning
 ---- | -------
-0 and 1 | Front Left Wheel Speed
-2 and 3 | Front Right Wheel Speed
-4 and 5 | Rear Left Wheel Speed
-6 and 7 | Rear Right Wheel Speed
+0 & 1 | Front Left Wheel Speed
+2 & 3 | Front Right Wheel Speed
+4 & 5 | Rear Left Wheel Speed
+6 & 7 | Rear Right Wheel Speed
 
 Channel name | Equation | Notes
 ------------ | -------- | -----
