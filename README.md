@@ -51,6 +51,7 @@ Recommended parts list:
 * [~22 AWG wires ](https://amzn.to/38nxNwW)
 * [JST SM connectors](https://www.amazon.com/gp/product/B07QG2TN1X/) **NOT NEEDED IF YOU DO THE OBD CONNECTOR ALTERNATIVE**
 * Crimping tool for JST connectors **NOT NEEDED IF YOU DO THE OBD CONNECTOR ALTERNATIVE**
+
 **ALTERNATIVE:**
 * [OBD male connector](https://amzn.to/3l5thsf)
 * [12V to 5V stepdown DC DC converter to draw power from OBD pin 16](https://amzn.to/3qvYfuy)
