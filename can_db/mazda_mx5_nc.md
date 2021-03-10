@@ -3,6 +3,8 @@
 Here is information on some of the PIDs that you're most likely to use with
 RaceChrono and equations to get the right scale, etc.
 
+Please note there is still much work in progress, any contribute will be welcomed.
+
 ## PID 0x081
 
 Update frequency: 100 times per second.
