@@ -114,6 +114,11 @@ the customizations were made, and tweak to work better with your car.
 If you do have an FT86 car, you might want to read [the info](can_db/ft86.md) on
 messages that these cars are known to send over their CAN network.
 
+Some information about the CAN data has been documented for Mazda MX-5/Miata
+([NC generation](can_db/mazda_mx5_nc.md) and
+[ND generation](can_db/mazda_mx5_nd.md). If you know CAN PIDs and equations for
+other track cars, feel free to send a pull request!
+
 It might be nice to make these customizations programmable via a mobile app and
 store the preferences in the flash storage of the nRF52840, but currently this
 has not been implemented to keep the code minimalistic and easier to read.
