@@ -1,15 +1,15 @@
 # Mazda MX5 2005-2015 (third generation, including NC/NCFL/NCFLFL or MK3/MK3.5/MK3.75)
 
-Here is information on some of the PIDs that you're most likely to use with
+Here is information on some of the CAN IDs that you're most likely to use with
 RaceChrono and equations to get the right scale, etc.
 
 Please note there is still much work in progress, any contributions are welcome.
 
-## PID 0x081
+## CAN ID 0x081
 
 Update frequency: 100 times per second.
 
-`0x081` contain data related to steering angle. This PID is available only in
+`0x081` contain data related to steering angle. This CAN ID is available only in
 cars with DSC module, so all cars from 2007 onwards.
 Only 4 bytes long.
 
@@ -24,11 +24,11 @@ Channel name | Equation | Notes
 ------------ | -------- | -----
 Steering angle | `bytesToInt(raw, 2, 2)` | positive values are from centered position (0) to right, negative otherwise
 
-## PID 0x085
+## CAN ID 0x085
 
 Update frequency: 100 times per second.
 
-`0x085` contain data related to braking. This PID is available only in
+`0x085` contain data related to braking. This CAN ID is available only in
 cars with DSC module, so all cars from 2007 onwards.
 
 Byte | Meaning
@@ -47,11 +47,11 @@ Brake pressure | `(3.4518689053*bytesToInt(raw, 0, 2)-327.27)/1000.00` | multipl
 Brake percentage | `min(0.2*(bytesToInt(raw, 0, 2)-102),100)` | this is an alternative to get brake percentage. When not pressed the value is 102, after braking and releasing it goes briefly down to 99 so you may see slightly negative percentage.
 Digital | `bitsToUint(raw,17,1)/2` | 0-1 value
 
-## PID 0x090
+## CAN ID 0x090
 
 Update frequency: 100 times per second.
 
-`0x090` WIP. Probably related to accelerations. This PID is available only in
+`0x090` WIP. Probably related to accelerations. This CAN ID is available only in
 cars with DSC module, so all cars from 2007 onwards.
 
 Byte | Meaning
@@ -69,7 +69,7 @@ Channel name | Equation | Notes
 ------------ | -------- | -----
 ... | ... | ...
 
-## PID 0x200
+## CAN ID 0x200
 
 Update frequency: 100 times per second.
 
@@ -89,13 +89,13 @@ Byte | Meaning
 
 Channel name | Equation | Notes
 ------------ | -------- | -----
-Throttle Position | `bytestouint(raw,7,1)*100/255.00` | Scale may need adjustment, doesn't take into account the offset for idle. Same value available in PID 0x215 byte 6
+Throttle Position | `bytestouint(raw,7,1)*100/255.00` | Scale may need adjustment, doesn't take into account the offset for idle. Same value available in CAN ID 0x215 byte 6
 
-## PID 0x201
+## CAN ID 0x201
 
 Update frequency: 100 times per second.
 
-`0x201` This PID is related to engine speed, vehicle speed
+`0x201` This CAN ID is related to engine speed, vehicle speed
 and accelerator position.
 
 Byte | Meaning
@@ -113,7 +113,7 @@ Engine RPM | `bytestouint(raw,0,2)/4.00` |
 Speed | `((bytestoint(raw,4,2)/100.00)-100)/3.6` | Raw speed data is given in km/h with a 100 km/h offset. The "3.6" at the end of the equation is needed to switch to m/s that is the unit used internally for calculation by RaceChrono. In the calculation RaceChrono will then multiply automatically for the correct value to transform the m/s to your choice of units (i.e. km/h or mph).
 Accelerator Position | `bytestoint(raw,6,1)*2.00` | This is a percentage, increments of 0.5%
 
-## PID 0x215
+## CAN ID 0x215
 
 Update frequency: 100 times per second.
 
@@ -133,9 +133,9 @@ Byte | Meaning
 
 Channel name | Equation | Notes
 ------------ | -------- | -----
-Throttle Position | `bytestouint(raw,6,1)*100/255.00` | Scale may need adjustment, doesn't take into account the offset for idle. Same value available in PID 0x200 byte 7
+Throttle Position | `bytestouint(raw,6,1)*100/255.00` | Scale may need adjustment, doesn't take into account the offset for idle. Same value available in CAN ID 0x200 byte 7
 
-## PID 0x231
+## CAN ID 0x231
 
 Update frequency: 40 times per second.
 
@@ -159,7 +159,7 @@ Channel name | Equation | Notes
 Digital | `(bitstouint(raw,15,1)-4)/2` | 0 - 1 value
 
 
-## PID 0x240
+## CAN ID 0x240
 
 Update frequency: 10 times per second.
 
@@ -187,7 +187,7 @@ Throttle position | `100*bytestouint(raw,1,1)/255` | Scale may need adjustment. 
 Ignition advance
 Intake temperature | `bytestouint(raw,4,1)-40` | RaceChrono does calculation in °C then converts to your unit of choice
 
-## PID 0x4b0
+## CAN ID 0x4b0
 
 Update frequency: 100 times per second.
 
@@ -208,12 +208,12 @@ Vehicle Speed Rear Left | `((bytestoint(raw,4,2)/100.00)-100)/3.6` |
 Vehicle Speed Rear Right | `((bytestoint(raw,6,2)/100.00)-100)/3.6` |
 
 
-## Typical histogram of PIDs
+## Typical histogram of CAN IDs
 
-Here's what the distribution of PIDs looks like in the CAN bus while idling in a
-parking lot:
+Here's what the distribution of CAN IDs looks like in the CAN bus while idling
+in a parking lot:
 
- PID | Decimal PID | Number of packets received over a 10 second period
+CAN ID (hex) | CAN ID (decimal) | Number of packets received over a 10 second period
 ---- | --- | ---
 081 | 129 | 1000
 085 | 133 | 1000

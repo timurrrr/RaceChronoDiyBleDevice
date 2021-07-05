@@ -116,7 +116,7 @@ messages that these cars are known to send over their CAN network.
 
 Some information about the CAN data has been documented for Mazda MX-5/Miata
 ([NC generation](can_db/mazda_mx5_nc.md) and
-[ND generation](can_db/mazda_mx5_nd.md)). If you know CAN PIDs and equations for
+[ND generation](can_db/mazda_mx5_nd.md)). If you know CAN IDs and equations for
 other track cars, feel free to send a pull request!
 
 It might be nice to make these customizations programmable via a mobile app and
