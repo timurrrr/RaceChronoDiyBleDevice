@@ -20,7 +20,7 @@ Steering angle | 134 | `(16000 - bytesToUInt(raw, 0, 2)) * 0.1` | Positive value
 Speed | 514 | `bytesToInt(raw, 2, 2) / 360.0` |
 Engine RPM | 514 | `bytesToUInt(raw, 0, 2) / 4` | If someone records >8192 rpms to confirm, let me know :)
 
-*Note*
+*Note about the "Brake position (%)" channel.*\
 The binary representation used for the brake pedal/pressure is very weird.
 In my limited testing, I've observed the values of 149...154 when not touching
 the brake pedal. Most of the time it stays as 154. When progressively pressing
@@ -28,8 +28,7 @@ the brake pedal, the number goes up to 255, then wraps around to 0, and keeps
 going up. I've observed values as high as 145 when heavy braking, and ~135 when
 braking hard enough to engage ABS. It very much feels like the representation is
 `(cast_to_int(brake_pressure * multiplier) + offset) % 255`, as long as we allow
-the `brake_pressure` to go slightly negative.
-
+the `brake_pressure` to go slightly negative.\
 Now out of all 0...255 possible values, this leaves us with only 146...148
 values that I haven't observed. For now, I've made an assumption that 146 is
 "braking even harder than I was ever able to brake", and 147 and 148 are just
