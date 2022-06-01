@@ -123,8 +123,8 @@ If you do have an FT86 car, you might want to read
 * [This page](can_db/ft86.md) for 2013-2020 model year cars
 * [This page](can_db/ft86_gen2.md) for 2022 model year cars
 
-on what data can be captured from their CAN bus, as well as how to set it up in
-RaceChrono.
+on how to make a harness between the CAN bus and the reader, as well as how to
+set up data channels in RaceChrono.
 
 Some information about the CAN data has been documented for Mazda MX-5/Miata
 ([NC generation](can_db/mazda_mx5_nc.md) and
