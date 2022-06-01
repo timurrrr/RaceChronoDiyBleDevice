@@ -148,6 +148,12 @@ from my fork of the `arduino-CAN` library, and connect the two boards into a
 small CAN network. Note that you don't need to use a jumper to connect the
 120 Ohm resistor on the second board in a CAN network (right?).
 
+When you're sure that you've assembled everything correctly and basic tests pass
+on your table top with a "fake car" device, it's time to put things into the
+car. Here's how the final setup looked like in my 2017 Subaru BRZ:
+
+![CAN bus reader installed in the glovebox of a 2017 Subaru BRZ](ft86_glovebox.jpg)
+
 ## Contributions
 
 I'd be happy to add more info on the CAN protocol for other popular sport cars.
