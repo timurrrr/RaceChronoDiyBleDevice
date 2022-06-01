@@ -27,27 +27,11 @@ damage, loss of control, injuries and even death.
 By using any information or code in this project you assume any and all risk,
 and release any liability from the author(s) and contributors to this project.
 
-## Supported Hardware
+## Assembling the hardware
 
-* Adafruit ItsyBitsy nRF52840 Express
-* Adafruit Feather nRF52832
-* 16 MHz MCP2515 breakout boards (probably MCP25625 as well)
-
-## Prerequisites
-
-You will need to install two libraries for Arduino:
-```sh
-cd ~/Documents/Arduino/libraries/  # ~/Arduino/libraries on Mac OS
-git clone https://github.com/timurrrr/arduino-CAN CAN
-git clone https://github.com/timurrrr/arduino-RaceChrono arduino-RaceChrono
-```
-
-It's important that you don't use the arduino-CAN library available in the
-Arduino IDE built-in library manager, as it has multiple bugs, and many
-operations are implemented in an ineffective way. My pull requests to address
-those have not been reviewed at the time of writing.
-
-## Assembling
+This section describes how to build the hardware for the CAN bus reader with a
+JST SM connector. The connector can then be used to connect to a car-specific
+harness for the CAN bus.
 
 Recommended parts list:
 
@@ -103,21 +87,47 @@ SI | MO
 SCK | SCK
 INT | Currently unused, may use 9 in the future
 
-Optionally, put everything into a nice enclosure.
+Optionally, put everything into a nice enclosure, but make sure to keep the
+twisted pair with the JST connector available, as well as the USB port for power
+and programming.
+
+## Installing the firware
+
+You will need to install two libraries for Arduino:
+```sh
+cd ~/Documents/Arduino/libraries/  # ~/Arduino/libraries on Mac OS
+git clone https://github.com/timurrrr/arduino-CAN CAN
+git clone https://github.com/timurrrr/arduino-RaceChrono arduino-RaceChrono
+```
+
+It's important that you don't use the arduino-CAN library available in the
+Arduino IDE built-in library manager, as it has multiple bugs, and many
+operations are implemented in an ineffective way. My pull requests to address
+those have not been reviewed at the time of writing.
+
+Once everything is set up, compile and upload the `RaceChronoDiyBleDevice.ino`
+"sketch" using Arduino IDE.
 
 ## Tweaking to work with your car
 
-This particular example is optimized to work with FT86 cars (Subaru BRZ,
-Toyota 86, Scion FR-S). You can search for "BRZ" in the source code to see where
-the customizations were made, and tweak to work better with your car.
+This particular project was designed for FT86 cars (Subaru BRZ,
+Toyota 86/GT86/GR86, Scion FR-S). You can search for "BRZ" in the source code to
+see where the customizations were made, and tweak to work better with your car.
 
-If you do have an FT86 car, you might want to read [the info](can_db/ft86.md) on
-messages that these cars are known to send over their CAN network.
+If you do have an FT86 car, you might want to read
+
+* [This page](can_db/ft86.md) for 2013-2020 model year cars
+* [This page](can_db/ft86_gen2.md) for 2022 model year cars
+
+on what data can be captured from their CAN bus, as well as how to set it up in
+RaceChrono.
 
 Some information about the CAN data has been documented for Mazda MX-5/Miata
 ([NC generation](can_db/mazda_mx5_nc.md) and
-[ND generation](can_db/mazda_mx5_nd.md)). If you know CAN IDs and equations for
-other track cars, feel free to send a pull request!
+[ND generation](can_db/mazda_mx5_nd.md)).
+
+If you know CAN IDs and equations for other track cars, feel free to send a pull
+request!
 
 It might be nice to make these customizations programmable via a mobile app and
 store the preferences in the flash storage of the nRF52840, but currently this
@@ -126,6 +136,7 @@ has not been implemented to keep the code minimalistic and easier to read.
 ## Testing
 
 You don't need to always be in the car to test changes.
+
 Instead, you can build another device (possibly using a cheaper board, such as
 Arduino Uno), and use the
 [FakeSubaruBRZ example](https://github.com/timurrrr/arduino-CAN/tree/master/examples/FakeSubaruBRZ)
