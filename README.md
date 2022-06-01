@@ -71,6 +71,10 @@ the board, and finish with a nice JST SM connector:
 
 ![MCP2515 board with mods](images/mcp_mods_closeup.jpg)
 
+I suggest using a white cable for CAN L and a colored cable for CAN H.
+If you use a consistent color scheme for these wires and for the harness you use
+in your car, it will be easier to make sure you get the polarity right.
+
 Finally, put the MCP on the breadboard.
 
 ![Assembled view](images/overall.jpg)
