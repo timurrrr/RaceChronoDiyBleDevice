@@ -1,14 +1,35 @@
 # RaceChronoDiyBleDevice
 DIY BLE device for RaceChrono, currently supports reading data from the CAN bus.
 
-There are some optimizations in the code that are specific to the FT86 platform
-cars (Subaru BRZ, Toyota 86, Scion FR-S), but it should be straightforward to
-tweak the code for other cars.
+[RaceChrono](https://racechrono.com/) is a lap timer app that supports
+collecting all kinds of data: GPS, OBD-II, heart rate, etc.\
+Most importantly for this project, it allows collecting high quality high
+refresh rate data from the CAN bus of a car.
+
+If you're lucky to have a car where the main CAN bus is available on pins 6 and
+14 of the OBD-II port (such as 2013-2020 Subary BRZ, Scion FR-S, Toyota 86;
+NC and ND generation Miatas), you can collect the data from the CAN bus using an
+affordable OBDLink MX+ reader.
+
+Some newer car cars (2022 Subaru BRZ and Toyota GR86, 2018+ Subaru WRX, many
+Porsches) isolate the CAN bus from the OBD-II port, so you can only get slow and
+limited data using the OBD-II protocol. However, if you can find an alternative
+place to access the CAN bus, you can read data from there -- albeit you'll need
+to do some custom connections.
+
+This project documents how to make your own DIY device that can listen to the
+data on the CAN bus of the car, and relay it to RaceChrono using Bluetooth Low
+Energy (BLE). The code has customizations for my 2022 Toyota GR86, as well as a
+2017 Subaru BRZ I used to own, but you should be able to un-do those
+customizations and do something similar for your car if it's different from
+those two.
 
 ## Demo
 
-Here is a video demonstrating data acquired using this device:
-[![Demo video](https://img.youtube.com/vi/j01LALSN7dQ/0.jpg)](https://www.youtube.com/watch?v=j01LALSN7dQ)
+Here is a video I made in RaceChrono using the data acquired by RaceChrono from
+a DIY CAN bus reader:
+
+[![Demo video](https://img.youtube.com/vi/R1ucTVodH9Q/0.jpg)](https://www.youtube.com/watch?v=R1ucTVodH9Q)
 
 [Here](https://www.ft86club.com/forums/showthread.php?p=3347436#post3347436)
 is a post with more info on how I got RaceChrono displayed on my headunit via
@@ -65,7 +86,6 @@ Un-solder the header from the MCP board and solder a new header on the other
 side of the board to make it more breadboard-friendly.
 
 Replace the 8 MHz quartzes on your MCPs with 16 MHz quartzes, if needed.
-Install the jumper that connects the 120 Ohm terminal resistor.
 Optionally, un-solder the screw terminal and solder a twisted pair of wires to
 the board, and finish with a nice JST SM connector:
 
@@ -95,9 +115,9 @@ Optionally, put everything into a nice enclosure, but make sure to keep the
 twisted pair with the JST connector available, as well as the USB port for power
 and programming.
 
-## Installing the firware
+## Installing the firmware
 
-You will need to install two libraries for Arduino:
+You will need to install two Arduino libraries before you can build the project:
 ```sh
 cd ~/Documents/Arduino/libraries/  # ~/Arduino/libraries on Mac OS
 git clone https://github.com/timurrrr/arduino-CAN CAN
@@ -120,8 +140,8 @@ see where the customizations were made, and tweak to work better with your car.
 
 If you do have an FT86 car, you might want to read
 
-* [This page](can_db/ft86.md) for 2013-2020 model year cars
 * [This page](can_db/ft86_gen2.md) for 2022 model year cars
+* [This page](can_db/ft86.md) for 2013-2020 model year cars
 
 on how to make a harness between the CAN bus and the reader, as well as how to
 set up data channels in RaceChrono.
@@ -153,6 +173,9 @@ on your table top with a "fake car" device, it's time to put things into the
 car. Here's how the final setup looked like in my 2017 Subaru BRZ:
 
 ![CAN bus reader installed in the glovebox of a 2017 Subaru BRZ](images/ft86_glovebox.jpg)
+
+If you have reliability issues with the CAN bus, try installing a jumper to
+connect the 120 Ohm terminal resistor in parallel to the CAN chip.
 
 ## Contributions
 
