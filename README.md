@@ -152,7 +152,7 @@ When you're sure that you've assembled everything correctly and basic tests pass
 on your table top with a "fake car" device, it's time to put things into the
 car. Here's how the final setup looked like in my 2017 Subaru BRZ:
 
-![CAN bus reader installed in the glovebox of a 2017 Subaru BRZ](ft86_glovebox.jpg)
+![CAN bus reader installed in the glovebox of a 2017 Subaru BRZ](images/ft86_glovebox.jpg)
 
 ## Contributions
 
