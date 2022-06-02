@@ -48,7 +48,17 @@ damage, loss of control, injuries and even death.
 By using any information or code in this project you assume any and all risk,
 and release any liability from the author(s) and contributors to this project.
 
-## Assembling the hardware
+## High level overview of the next steps
+
+1. Assemble the CAN bus reader
+2. Build and install the firmware
+3. (Optional) Make sure everything works with another CAN device that sends
+   "fake" data as your real car would.
+4. Make a harness to connect the CAN bus reader to the CAN bus of your car
+5. Connect the reader to your car and verify it actually works
+6. Enjoy!
+
+## Assembling the CAN bus reader
 
 This section describes how to build the hardware for the CAN bus reader with a
 JST SM connector. The connector can then be used to connect to a car-specific
@@ -115,7 +125,7 @@ Optionally, put everything into a nice enclosure, but make sure to keep the
 twisted pair with the JST connector available, as well as the USB port for power
 and programming.
 
-## Installing the firmware
+## Building and installing the firmware
 
 You will need to install two Arduino libraries before you can build the project:
 ```sh
@@ -132,7 +142,27 @@ those have not been reviewed at the time of writing.
 Once everything is set up, compile and upload the `RaceChronoDiyBleDevice.ino`
 "sketch" using Arduino IDE.
 
-## Tweaking to work with your car
+## Testing with a "fake car"
+
+It's a good idea to do some basic tests with another CAN device that sends data
+over a CAN bus that's similar to what a real car would send.
+
+See the
+[FakeSubaruBRZ example](https://github.com/timurrrr/arduino-CAN/tree/master/examples/FakeSubaruBRZ)
+in my fork of the `arduino-CAN` library that sends data over a CAN bus in a way
+very similar to what a real 2017 Subaru BRZ would send.
+
+TODO: write another example for a 2022 GR86/BRZ.
+
+Once you assemble that device and install its firmware, connect the CAN reader
+with the CAN end of the "fake car" via a twisted pair.
+You will probably need to use a 120 Ohm resistor on the second board.
+
+For these tests you'll probably find it easier to power the CAN reader via USB
+from your computer/laptop, and maybe watch the "Serial monitor" in Arduino IDE
+to diagnose issues.
+
+## Making the CAN reader ready to work with your car
 
 This particular project was designed for FT86 cars (Subaru BRZ,
 Toyota 86/GT86/GR86, Scion FR-S). You can search for "BRZ" in the source code to
@@ -150,23 +180,15 @@ Some information about the CAN data has been documented for Mazda MX-5/Miata
 ([NC generation](can_db/mazda_mx5_nc.md) and
 [ND generation](can_db/mazda_mx5_nd.md)).
 
-If you know CAN IDs and equations for other track cars, feel free to send a pull
-request!
+If you know how to make physical connections, CAN IDs and equations for other
+popular track cars, feel free to send a pull request!
 
-It might be nice to make these customizations programmable via a mobile app and
-store the preferences in the flash storage of the nRF52840, but currently this
-has not been implemented to keep the code minimalistic and easier to read.
+It might be nice to make the software customizations programmable via a mobile
+app and store the preferences in the flash storage of the nRF52840, but
+currently this has not been implemented to keep the code minimalistic and easier
+to read.
 
-## Testing
-
-You don't need to always be in the car to test changes.
-
-Instead, you can build another device (possibly using a cheaper board, such as
-Arduino Uno), and use the
-[FakeSubaruBRZ example](https://github.com/timurrrr/arduino-CAN/tree/master/examples/FakeSubaruBRZ)
-from my fork of the `arduino-CAN` library, and connect the two boards into a
-small CAN network. Note that you don't need to use a jumper to connect the
-120 Ohm resistor on the second board in a CAN network (right?).
+## Final steps
 
 When you're sure that you've assembled everything correctly and basic tests pass
 on your table top with a "fake car" device, it's time to put things into the
@@ -176,6 +198,13 @@ car. Here's how the final setup looked like in my 2017 Subaru BRZ:
 
 If you have reliability issues with the CAN bus, try installing a jumper to
 connect the 120 Ohm terminal resistor in parallel to the CAN chip.
+
+At this point you may want to either power the device from a nearby 12V socket
+via 12V-to-USB adapter and a USB cable, or upgrade your harness to also provide
+12V ACC power and GND besides CAN H/L, and find a place for a 12V->5V step down
+/ buck converter.
+
+TODO: document how to use 12V ACC power to power the board.
 
 ## Contributions
 
