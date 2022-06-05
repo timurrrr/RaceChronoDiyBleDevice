@@ -21,17 +21,15 @@ Accelerator position (%) | 64 | `E / 2.55` |
 Brake position (%) | 313 | `min(F / 0.7, 100)` | The 0.7 divider seems to be a good value to get 100% at pressure slightly higher than those you're likely to use on the track for cars with no aero. You can use 0.8 or 0.9 if you see 100% too often.
 Brake pressure | 313 | `F * 128` | Coefficient taken from 1st gen cars, seems to match fine?
 Steering angle | 312 | `bytesToIntLe(raw, 2, 2) * 0.1` | Positive value = turning right. You can add a `-` if you prefer it the other way around.
-Speed | 323 | `bytesToIntLe(raw, 3, 2) * 0.015694` | May want to check the multiplier against an external GPS aevice
+Speed | 313 | `bitsToUIntLe(raw, 16, 13) * 0.015694` | You may want to check the multiplier against an external GPS device, especially if running larger/smaller diameter tires
 Engine RPM | 64 | `bitsToUIntLe(raw, 16, 14)` |
 Coolant temperature | 837 | `E - 40` |
 Engine oil temperature | 837 | `D - 40` |
 
-Below is a table with a few more data channels that might be useful for more
-detailed analysis. When adding more channels, be aware that it might negatively
-affect the update rate of the more essential channels, due to limited Bluetooth
-bandwidth.
+### Advanced CAN IDs
 
-TODO: add more
+Not required for most people, but if you're a data junkie like me you might
+enjoy the extra insight.
 
 Channel name | CAN ID | Equation | Notes
 ------------ | --- | -------- | -----
