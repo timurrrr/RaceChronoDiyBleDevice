@@ -1,7 +1,7 @@
 #include <CAN.h>
 #include <RaceChrono.h>
 
-#define DEVICE_NAME "BLE CAN device demo"
+#include "config.h"
 
 // Connections:
 //  MCP | BOARD
@@ -21,12 +21,6 @@ const long BAUD_RATE = 500 * 1E3;  // 500k.
 
 bool isCanBusReaderActive = false;
 long lastCanMessageReceivedMs;
-
-// We use RaceChronoPidMap to keep track of stuff for each PID.
-// In this implementation, we're going to ignore "update intervals" requested by
-// RaceChrono, and instead send every Nth CAN message we receive, per PID, where
-// N is different for different PIDs.
-const uint8_t DEFAULT_UPDATE_RATE_DIVIDER = 10;
 
 struct PidExtra {
   // Only send one out of |updateRateDivider| packets per PID.
@@ -127,44 +121,7 @@ public:
     if (entry != nullptr) {
       PidExtra *pidExtra = pidMap.getExtra(entry);
       pidExtra->skippedUpdates = 0;
-
-      // Customizations for Subaru BRZ / Toyota 86 / Scion FR-S:
-      switch (pid) {
-      // These are sent over the CAN bus 100 times per second, we want 25.
-      case 0x18:
-      case 0x140:
-      case 0x141:
-      case 0x142:
-        pidExtra->updateRateDivider = 4;
-        break;
-
-      // This is sent over the CAN bus 50 times per second and includes brake
-      // system pressure. It's useful to have this at the highest update rate
-      // possible, as braking can be very short, e.g. at autocross.
-      case 0xD1:
-        pidExtra->updateRateDivider = 1;
-        break;
-
-      // These are sent over the CAN bus 50 times per second, we want 25.
-      case 0xD0:
-      case 0xD2:
-      case 0xD3:
-      case 0xD4:
-      case 0x144:
-      case 0x152:
-      case 0x156:
-      case 0x280:
-        pidExtra->updateRateDivider = 2;
-        break;
-
-      // 0x360 is sent over the CAN bus 20 times per second, we want 1.
-      case 0x360:
-        pidExtra->updateRateDivider = 20;
-        break;
-
-      default:
-        pidExtra->updateRateDivider = DEFAULT_UPDATE_RATE_DIVIDER;
-      }
+      pidExtra->updateRateDivider = getUpdateRateDivider(pid);
     }
 
     dumpMapToSerial();
@@ -220,36 +177,13 @@ bool startCanBusReader() {
   CAN.setSPIFrequency(SPI_FREQUENCY);
   CAN.setPins(CS_PIN, IRQ_PIN);
 
-  boolean result = CAN.begin(BAUD_RATE, /* stayInConfigurationMode= */ true);
+  boolean result = CAN.begin(BAUD_RATE);
   if (!result) {
     Serial.println("ERROR: Unable to start the CAN bus listener.");
     return false;
   }
 
   Serial.println("Success!");
-
-  // These values are customized for Subaru BRZ / Toyota 86 / Scion FR-S.
-  // TODO: generalize this? Figure out a good way to build this from the list of
-  // requested PIDs? Or perhaps filtering is no longer needed after the recent
-  // stability improvements?
-  if (!CAN.setFilterRegisters(
-    /* mask0= */   0b11111111111 /* full match only */,
-    /* filter0= */ 0xD1,
-    /* filter1= */ 0x140,
-
-    /* mask1= */   0b11111111111 /* full match only */,
-    /* filter2= */ 0xD0,
-    /* filter3= */ 0xD4,
-    /* filter4= */ 0x360,
-    /* filter5= */ 0x360,  // Repeated filters don't matter.
-    /* allowRollover= */ false)) {
-    Serial.println("WARNING: Unable to set filter registers.");
-    Serial.println("Trying to continue without filtering...");
-    if (!CAN.switchToNormalMode()) {
-      Serial.println("WARNING: Unable to switch to normal mode!");
-      return false;
-    }
-  }
 
   isCanBusReaderActive = true;
   return true;
