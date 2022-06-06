@@ -19,10 +19,9 @@ to do some custom connections.
 
 This project documents how to make your own DIY device that can listen to the
 data on the CAN bus of the car, and relay it to RaceChrono using Bluetooth Low
-Energy (BLE). The code has customizations for my 2022 Toyota GR86, as well as a
-2017 Subaru BRZ I used to own, but you should be able to un-do those
-customizations and do something similar for your car if it's different from
-those two.
+Energy (BLE). The code has example configurations optimized the 2022 Toyota GR86
+I currently own, as well as a 2017 Subaru BRZ I used to own. If you have a
+different car, you'll need to figure out how to customize the code for your car.
 
 ## Demo
 
@@ -139,6 +138,10 @@ Arduino IDE built-in library manager, as it has multiple bugs, and many
 operations are implemented in an ineffective way. My pull requests to address
 those have not been reviewed at the time of writing.
 
+Then, open
+[`config.h`](https://github.com/timurrrr/RaceChronoDiyBleDevice/blob/master/config.h)
+and carefully read the comments.
+
 Once everything is set up, compile and upload the `RaceChronoDiyBleDevice.ino`
 "sketch" using Arduino IDE.
 
@@ -164,21 +167,31 @@ to diagnose issues.
 
 ## Making the CAN reader ready to work with your car
 
-This particular project was designed for FT86 cars (Subaru BRZ,
-Toyota 86/GT86/GR86, Scion FR-S). You can search for "BRZ" in the source code to
-see where the customizations were made, and tweak to work better with your car.
+This project was designed for FT86 cars (Subaru BRZ, Toyota 86/GT86/GR86,
+Scion FR-S). If you have one of those car, you should use the provided config
+files for those cars. See the comments in
+[`config.h`](https://github.com/timurrrr/RaceChronoDiyBleDevice/blob/master/config.h)
+for tips on how to do that.
 
-If you do have an FT86 car, you might want to read
+Then you might want to read
 
-* [This page](can_db/ft86_gen2.md) for 2022 model year cars
-* [This page](can_db/ft86.md) for 2013-2020 model year cars
+* [this page](can_db/ft86_gen2.md) for 2022 model year cars
+* [this page](can_db/ft86.md) for 2013-2020 model year cars
 
 on how to make a harness between the CAN bus and the reader, as well as how to
 set up data channels in RaceChrono.
 
+If you have a different car, you will need to do more research.
+
 Some information about the CAN data has been documented for Mazda MX-5/Miata
 ([NC generation](can_db/mazda_mx5_nc.md) and
 [ND generation](can_db/mazda_mx5_nd.md)).
+
+For other cars, a good starting point is the
+[PidHistogram example](https://github.com/timurrrr/arduino-CAN/tree/master/examples/PidHistogram).
+Using that example, you can see what CAN IDs are used on the CAN network, and
+prioritize your work accordingly. Typically the most useful information is
+included in messages with the most frequent CAN IDs.
 
 If you know how to make physical connections, CAN IDs and equations for other
 popular track cars, feel free to send a pull request!
