@@ -2,7 +2,7 @@
 #define RACECHRONO_BIY_BLE_DEVICE_CONFIG_H
 
 // Change the value
-#define DEVICE_NAME "CAN 2 BLE"
+#define DEVICE_NAME "BLE CAN device demo"
 
 // We use RaceChronoPidMap to keep track of stuff for each CAN ID.
 // In this implementation, we're going to ignore "update intervals" requested by
@@ -22,11 +22,10 @@ uint8_t getUpdateRateDivider(uint32_t can_id);
 // following lines:
 //#include "configs/ft86_gen1.h"
 //#include "configs/ft86_gen2.h"
-#include "configs/e46.h"
 
 // Once you read all the comments and address what they asked of you, please
 // uncomment the nest line:
-#define I_READ_THE_COMMENTS
+//#define I_READ_THE_COMMENTS
 
 #if !defined(I_READ_THE_COMMENTS)
 #error Please open config.h and read all the comments!
