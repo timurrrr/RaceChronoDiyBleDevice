@@ -40,12 +40,13 @@ CAN bus is like a "nervous system" in a car. It is a network that connects
 various ECUs, sensors, etc. Connecting a new device to this network poses risks
 such as data corruption, packet losses, etc., that can negatively affect the
 performance of some or all components of a car. Same applies to incorrect
-connections and alternations of the CAN bus wiring. This can cause various
+connections and alternations to the CAN bus wiring. This can cause various
 undesirable effects, such as "Check engine" lights, electrical and mechanical
 damage, loss of control, injuries and even death.
 
-By using any information or code in this project you assume any and all risk,
-and release any liability from the author(s) and contributors to this project.
+By using any information, hardware designs or code in this project you assume
+any and all risk, and release any liability from the author(s) and
+contributors to this project.
 
 ## High level overview of the next steps
 
