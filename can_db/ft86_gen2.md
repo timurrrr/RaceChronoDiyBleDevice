@@ -44,3 +44,4 @@ Channel name | CAN ID | Equation | Notes
 Yaw rate | 312 | `bytesToIntLe(raw, 4, 2) * -0.2725` | Calibrated against the gyroscope in RaceBox Mini. Gen1 used 0.286478897 instead.
 Lateral acceleration | 315 | `bytesToIntLe(raw, 6, 1) * 0.2` |
 Longitudinal acceleration | 315 | `bytesToIntLe(raw, 7, 1) * -0.1` |
+Combined acceleration | 315 | `sqrt(pow2(bytesToIntLe(raw, 6, 1) * 0.2) + pow2(bytesToIntLe(raw, 7, 1) * 0.1))` |
