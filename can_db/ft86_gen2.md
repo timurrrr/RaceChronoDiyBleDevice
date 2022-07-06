@@ -36,12 +36,13 @@ However, the communication protocol in RaceChrono is smart enough to optimize
 Bluetooth usage if multiple channels share the same CAN ID. As a general rule,
 if a new channel has the same CAN ID as an existing channel (such as "Yaw rate"
 using the same CAN ID 312 as "Steering angle"), then adding it should not affect
-the update rates. Adding a channel based on a new CAN ID (such as "Lateral
-acceleration") will likely affect the update rates of all other channels.
+the update rates. Adding a channel based on a new CAN ID (such as "Clutch
+position") will likely negatively affect the update rates of all other channels.
 
 Channel name | CAN ID | Equation | Notes
 ------------ | --- | -------- | -----
-Yaw rate | 312 | `bytesToIntLe(raw, 4, 2) * -0.2725` | Calibrated against the gyroscope in RaceBox Mini. Gen1 used 0.286478897 instead.
+Clutch position (%) | 577 | `(F & 0x80) / 1.28` | `100` is "clutch pedal depressed", `0` is "clutch pedal released"
 Lateral acceleration | 315 | `bytesToIntLe(raw, 6, 1) * 0.2` |
 Longitudinal acceleration | 315 | `bytesToIntLe(raw, 7, 1) * -0.1` |
 Combined acceleration | 315 | `sqrt(pow2(bytesToIntLe(raw, 6, 1) * 0.2) + pow2(bytesToIntLe(raw, 7, 1) * 0.1))` |
+Yaw rate | 312 | `bytesToIntLe(raw, 4, 2) * -0.2725` | Calibrated against the gyroscope in RaceBox Mini. Gen1 used 0.286478897 instead.
