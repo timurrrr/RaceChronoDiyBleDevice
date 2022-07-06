@@ -20,7 +20,7 @@ Channel name | CAN ID | Equation | Notes
 Accelerator position (%) | 64 | `E / 2.55` |
 Brake position (%) | 313 | `min(F / 0.7, 100)` | The 0.7 divider seems to be a good value to get 100% at pressure slightly higher than those you're likely to use on the track for cars with no aero. You can use 0.8 or 0.9 if you see 100% too often.
 Brake pressure | 313 | `F * 128` | Coefficient taken from 1st gen cars, seems to match fine?
-Steering angle | 312 | `bytesToIntLe(raw, 2, 2) * 0.1` | Positive value = turning right. You can add a `-` if you prefer it the other way around.
+Steering angle | 312 | `bytesToIntLe(raw, 2, 2) * -0.1` | Positive value = turning left. You can add a `-` if you prefer it the other way around.
 Speed | 313 | `bitsToUIntLe(raw, 16, 13) * 0.015694` | You may want to check the multiplier against an external GPS device, especially if running larger/smaller diameter tires
 Engine RPM | 64 | `bitsToUIntLe(raw, 16, 14)` |
 Coolant temperature | 837 | `E - 40` |
