@@ -28,9 +28,19 @@ Engine oil temperature | 837 | `D - 40` |
 
 ### Advanced CAN IDs
 
-Not required for most people, but if you're a data junkie like me you might
-enjoy the extra insight.
+Below is a table with a few more data channels that might be useful for more
+detailed analysis. When adding more channels, be aware that it will increase
+the file size of your RaceChrono sessions, and might negatively affect the
+update rate of the more essential channels, due to limited Bluetooth bandwidth.
+However, the communication protocol in RaceChrono is smart enough to optimize
+Bluetooth usage if multiple channels share the same CAN ID. As a general rule,
+if a new channel has the same CAN ID as an existing channel (such as "Yaw rate"
+using the same CAN ID 312 as "Steering angle"), then adding it should not affect
+the update rates. Adding a channel based on a new CAN ID (such as "Lateral
+acceleration") will likely affect the update rates of all other channels.
 
 Channel name | CAN ID | Equation | Notes
 ------------ | --- | -------- | -----
 Yaw rate | 312 | `bytesToIntLe(raw, 4, 2) * -0.2725` | Calibrated against the gyroscope in RaceBox Mini. Gen1 used 0.286478897 instead.
+Lateral acceleration | 315 | `bytesToIntLe(raw, 6, 1) * 0.2` |
+Longitudinal acceleration | 315 | `bytesToIntLe(raw, 7, 1) * -0.1` |
