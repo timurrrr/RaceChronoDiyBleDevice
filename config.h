@@ -22,6 +22,7 @@ uint8_t getUpdateRateDivider(uint32_t can_id);
 // following lines:
 //#include "configs/ft86_gen1.h"
 //#include "configs/ft86_gen2.h"
+//#include "configs/e46.h"
 
 // Once you read all the comments and address what they asked of you, please
 // uncomment the nest line:
