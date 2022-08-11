@@ -152,11 +152,11 @@ It's a good idea to do some basic tests with another CAN device that sends data
 over a CAN bus that's similar to what a real car would send.
 
 See the
-[FakeSubaruBRZ example](https://github.com/timurrrr/arduino-CAN/tree/master/examples/FakeSubaruBRZ)
-in my fork of the `arduino-CAN` library that sends data over a CAN bus in a way
-very similar to what a real 2017 Subaru BRZ would send.
-
-TODO: write another example for a 2022 GR86/BRZ.
+[FakeToyotaGR86](https://github.com/timurrrr/arduino-CAN/tree/master/examples/FakeToyotaGR86)
+and
+[FakeSubaruBRZ](https://github.com/timurrrr/arduino-CAN/tree/master/examples/FakeSubaruBRZ)
+examples in my fork of the `arduino-CAN` library. They are good desktop "fakes" for
+2022+ Toyota GR86 / Subaru BRZ and 2013-2020 Subaru BRZ / Toyota 86 / Scion FR-S respectively.
 
 Once you assemble that device and install its firmware, connect the CAN reader
 with the CAN end of the "fake car" via a twisted pair.
