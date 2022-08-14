@@ -2,7 +2,9 @@
 // (2022+ model years).
 
 #if !defined(RACECHRONO_BIY_BLE_DEVICE_FT86_GEN2_H)
-#define RACECHRONO_BIY_BLE_DEVICE_FT86_GEN2_H)
+#define RACECHRONO_BIY_BLE_DEVICE_FT86_GEN2_H
+
+const long BAUD_RATE = 500 * 1e3;  // 500k.
 
 uint8_t getUpdateRateDivider(uint32_t can_id) {
   // This is sent over the CAN bus 50 times per second and includes brake

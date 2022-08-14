@@ -1,7 +1,7 @@
 #if !defined(RACECHRONO_BIY_BLE_DEVICE_CONFIG_H)
 #define RACECHRONO_BIY_BLE_DEVICE_CONFIG_H
 
-// Change the value
+// Change the value to customize the name of your device.
 #define DEVICE_NAME "BLE CAN device demo"
 
 // We use RaceChronoPidMap to keep track of stuff for each CAN ID.
@@ -11,12 +11,18 @@
 const uint8_t DEFAULT_UPDATE_RATE_DIVIDER = 10;
 
 // You need to pick one of the provided configurations below, or define your own
-// configuration. Your configuration should define the following two functions:
+// configuration. Your configuration should define the following constant and
+// function:
+
+// Defines the baud rate to use for the CAN bus. For example, 500k baud rate
+// should be written as 500 * 1e3.
+extern const long BAUD_RATE;  // 500k.
 
 // Returns an "update rate divider for a given CAN ID.
 // If the value is N, only every Nth message received from the CAN bus will be
 // communicated to RaceChrono via BLE.
 uint8_t getUpdateRateDivider(uint32_t can_id);
+
 
 // Here are some configurations you can pick from by uncommenting one of the
 // following lines:

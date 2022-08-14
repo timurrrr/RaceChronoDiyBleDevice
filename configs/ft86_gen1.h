@@ -2,7 +2,9 @@
 // (2013-2020 model years).
 
 #if !defined(RACECHRONO_BIY_BLE_DEVICE_FT86_GEN1_H)
-#define RACECHRONO_BIY_BLE_DEVICE_FT86_GEN1_H)
+#define RACECHRONO_BIY_BLE_DEVICE_FT86_GEN1_H
+
+const long BAUD_RATE = 500 * 1e3;  // 500k.
 
 uint8_t getUpdateRateDivider(uint32_t can_id) {
   switch (can_id) {

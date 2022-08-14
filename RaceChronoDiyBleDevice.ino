@@ -17,7 +17,6 @@ const int IRQ_PIN = 9;
 
 const long QUARTZ_CLOCK_FREQUENCY = 16 * 1E6;  // 16 MHz.
 const uint32_t SPI_FREQUENCY = 10 * 1E6;  // 10 MHz.
-const long BAUD_RATE = 500 * 1E3;  // 500k.
 
 bool isCanBusReaderActive = false;
 long lastCanMessageReceivedMs;
