@@ -62,7 +62,9 @@ contributors to this project.
 
 This section describes how to build the hardware for the CAN bus reader with a
 JST SM connector. The connector can then be used to connect to a car-specific
-harness for the CAN bus.
+harness for the CAN bus. You can try other hardware (there's even experimental
+support for ESP32 and RejsaCAN), but you'll need to figure some things yourself
+if you do so.
 
 Recommended parts list:
 

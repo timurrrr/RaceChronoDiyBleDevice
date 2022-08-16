@@ -198,9 +198,9 @@ void loop() {
 
   // First, verify that we have both Bluetooth and CAN up and running.
 
-  // Not clear how heavy is the Bluefruit.connected() call. Only check the
-  // connectivity every 100 iterations to avoid stalling the CAN bus loop.
-  if ((loop_iteration % 100) == 0 && !Bluefruit.connected()) {
+  // Not clear how heavy is the isConnected() call. Only check the connectivity
+  // every 100 iterations to avoid stalling the CAN bus loop.
+  if ((loop_iteration % 100) == 0 && !RaceChronoBle.isConnected()) {
     Serial.println("RaceChrono disconnected!");
     raceChronoHandler.handleDisconnect();
     stopCanBusReader();
