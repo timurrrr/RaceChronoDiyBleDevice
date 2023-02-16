@@ -3,10 +3,6 @@
 For details on how to connect to the CAN bus, as well as more information on the
 information available on the CAN bus, see https://github.com/timurrrr/ft86/blob/main/can_bus/gen2.md
 
-Note: the gen2 CAN IDs require some code changes to this CAN bus reader project
-(such as different rate limiting parameters) that haven't been pushed to GitHub
-yet. Stay tuned!
-
 Special thanks to Ken Houseal for his early legwork on finding some of these
 data mappings!
 
@@ -46,3 +42,9 @@ Lateral acceleration | 315 | `bytesToIntLe(raw, 6, 1) * 0.2` |
 Longitudinal acceleration | 315 | `bytesToIntLe(raw, 7, 1) * -0.1` |
 Combined acceleration | 315 | `sqrt(pow2(bytesToIntLe(raw, 6, 1) * 0.2) + pow2(bytesToIntLe(raw, 7, 1) * 0.1))` |
 Yaw rate | 312 | `bytesToIntLe(raw, 4, 2) * -0.2725` | Calibrated against the gyroscope in RaceBox Mini. Gen1 used 0.286478897 instead.
+
+---
+
+If you found this page useful, consider donating so I can buy beer/boba:
+ 
+[![paypal](https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif)](https://www.paypal.com/donate?business=ZKULAWZFJKCES&item_name=Donation+to+support+the+RaceChronoDiyBleDevice+project+on+GitHub&currency_code=USD)
